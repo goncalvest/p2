@@ -84,9 +84,8 @@ Node* atPos(List* list, int index){
        for(i = 0; i < index; i++)
        {
          node = node->next;
-
+       }
          return node;
-       } 
      }
 
      return NULL;
@@ -118,7 +117,7 @@ int main()
 
      //printList(l);
      //printf("\n");
-     printf("%d", atPos(l, 5)->data.id);
+     printf("%d", atPos(l, 0)->data.id);
 
   return 0;
 }
