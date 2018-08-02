@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+typedef struct datanode{
+      int id;
+
+}DataNode;
+
+typedef struct node{
+      DataNode data;
+      struct node* next;
+
+}Node;
+
+typedef struct list{
+      int size;
+      Node* head;
+}List;
+
+List* creatlist();
+void push(List* list, DataNode data);
+void printList(List* list);
+void pop(List* list);
+bool isEmpty(List* list);
+Node* atPos(List* list, int index);
+
+List* creatlist(){
+      List* list = (List*) malloc(sizeof(List));
+
+      list->size = 0;
+      list->head = NULL;
+
+      return list;
+}
+
+void push(List* list, DataNode data){
+      Node* node = (Node*) malloc(sizeof(Node));
+      node->data = data;
+      node->next = list->head;
+      list->head = node;
+      list->size++;
+}
+
+void printList(List* list){
+      
+      if(isEmpty(list))
+      {
+        printf("Lista Vazia");
+        return;
+      }
+
+      Node* pointer = list->head;
+
+      while(pointer != NULL)
+      {
+        printf("%d ", pointer->data.id);
+        pointer = pointer->next;
+      }
+}
+
+bool isEmpty(List* list){
+      return (list->size == 0);
+}
+
+void pop(List* list){
+
+    if(!isEmpty(list)){
+      Node* pointer = list->head;
+      list->head = pointer->next;
+
+      free(pointer);
+      list->size--;
+    }
+}
+
+Node* atPos(List* list, int index){
+     
+     if(index >= 0 && index < list->size)
+     {
+       Node* node = list->head;
+
+       int i;
+       for(i = 0; i < index; i++)
+       {
+         node = node->next;
+
+         return node;
+       } 
+     }
+
+     return NULL;
+}
+
+int main()
+{
+     List* l = creatlist();
+     
+     DataNode data;
+
+     data.id = 5;
+     push(l, data);
+
+     data.id = 9;
+     push(l, data);
+     
+     data.id = 4;
+     push(l, data);
+     
+     data.id = 6;
+     push(l, data);
+     
+     data.id = 9;
+     push(l, data);
+
+     data.id = 8;
+     push(l, data);
+
+     //printList(l);
+     //printf("\n");
+     printf("%d", atPos(l, 5)->data.id);
+
+  return 0;
+}
