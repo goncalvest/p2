@@ -85,9 +85,8 @@ Node* atPos(List* list, int index){
        for(i = 0; i < index; i++)
        {
          node = node->next;
-
+       }
          return node;
-       } 
      }
 
      return NULL;
