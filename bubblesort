@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+void swap(int *v, int *v2)
+{
+  int aux;
+  aux = *v;
+  *v = *v2;
+  *v2 = aux;
+}
+
+void bubble(int *v, int size)
+{
+  int j, i;
+
+  for(j = 0; j < size; j++)
+  {
+    for(i = 0; i < size - 1; i++)
+    {
+      if(v[i] > v[i+1])
+      {
+        swap(&v[i], &v[i+1]);
+      }
+    }
+  }
+  
+  return;
+}
+
+void printv(int *v, int n)
+{
+  int i;
+  for(i = 0; i < n; i++)
+  {
+    printf("%d\n", v[i]);
+  }
+
+  return;
+}
+
+int main()
+{
+  printf("size:");
+  int n;
+  scanf("%d", &n);
+  printf("\n");
+
+  printf("array:\n");
+  int v[n];
+  int i;
+
+  for(i = 0; i < n; i++)
+  {
+    scanf("%d", &v[i]);
+  }
+
+  bubble(v, n);
+  printv(v, n);
+
+ return 0;
+}
