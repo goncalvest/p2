@@ -1,0 +1,83 @@
+#include <stdio.h>
+
+void swap(int *v, int *v2)
+{
+  int aux;
+  aux = *v;
+  *v = *v2;
+  *v2 = aux;
+}
+
+void quicksort(int *v, int left, int right, int n)
+{
+  int j, i;
+   i = left;
+   j = right;
+  int pivot = v[(left+right)/2];
+   
+while(i <= j)
+{
+     while(v[i] < pivot && i < right)
+     {
+       i++;
+     }
+
+     while(v[j] > pivot && j > left)
+     {
+       j--;
+     }
+
+  if(i <= j)
+  {
+   swap(&v[i], &v[j]);
+   i++;
+   j--;
+  }
+  
+}
+
+if(i < right)
+{
+  quicksort(v, i, right, n);
+}
+
+if(j > left)
+{
+   quicksort(v, left, j, n);
+}
+
+  return;
+}
+
+void printv(int *v, int n)
+{
+  int i;
+  for(i = 0; i < n; i++)
+  {
+    printf("%d\n", v[i]);
+  }
+
+  return;
+}
+
+int main()
+{
+  printf("size:");
+  int n;
+  scanf("%d", &n);
+  printf("\n");
+
+  printf("array:\n");
+  int v[n];
+  int i;
+
+  for(i = 0; i < n; i++)
+  {
+    scanf("%d", &v[i]);
+  }
+
+  quicksort(v, 0, n-1, n);
+  printv(v, n);
+
+ return 0;
+}
