@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+ int item;
+ struct node *next;
+}node;
+
+node* creat_linked_list()
+{
+  return NULL;
+}
+
+int is_empty(node *head)
+{
+  return (head == NULL);
+}
+
+node* add(node *head, int item)
+{
+  node *new_node = (node*) malloc(sizeof(node));
+  new_node->item = item;
+  new_node->next = head;
+  return new_node;
+}
+
+void print_linked_list(node *head)
+{
+  while(head != NULL)
+  {
+    printf("%d\n", head->item);
+    head = head->next;
+  }
+}
+
+node* remove_item(node *head, int item)
+{
+  node* previous = NULL;
+  node* current = head;
+  
+  while(current!= NULL && current->item != item)
+  {
+    previous = current;
+    current = current->next;
+  }
+
+  if(current == NULL)
+  {
+    return head;
+  }
+
+  if(previous == NULL)
+  {
+    head = current->next;
+  }
+  else
+  {
+    previous->next = current->next;
+  }
+  free(current);
+  return head;
+}
+
+int main(void) 
+{
+  node* list = creat_linked_list();
+  int n;
+  scanf("%d", &n);
+  int item;
+  int i;
+  
+  for(i = 0; i < n; i++)
+  {
+    scanf("%d", &item);
+    list = add(list, item);
+  }
+
+  print_linked_list(list);
+  remove_item(list, 3);
+  print_linked_list(list);
+  return 0;
+}
